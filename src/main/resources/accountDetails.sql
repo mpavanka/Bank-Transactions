@@ -1,0 +1,10 @@
+INSERT INTO account_details (account_number, account_holder_name, account_type, balance, bank_name) VALUES (1, 'John Doe', 'Savings', 5000.00, 'SBI');
+INSERT INTO account_details (account_number, account_holder_name, account_type, balance, bank_name) VALUES (2, 'Jane Smith', 'Current', 10000.00, 'SBI');
+INSERT INTO account_details (account_number, account_holder_name, account_type, balance, bank_name) VALUES (3, 'Alice Johnson', 'Savings', 7500.00, 'SBI');
+INSERT INTO account_details (account_number, account_holder_name, account_type, balance, bank_name) VALUES (4, 'Bob Brown', 'Current', 12000.00, 'SBI');
+INSERT INTO account_details (account_number, account_holder_name, account_type, balance, bank_name) VALUES (5, 'Charlie Davis', 'Savings', 3000.00, 'SBI');
+INSERT INTO account_details (account_number, account_holder_name, account_type, balance, bank_name) VALUES (6, 'Emily White', 'Savings', 8000.00, 'AXIS');
+INSERT INTO account_details (account_number, account_holder_name, account_type, balance, bank_name) VALUES (7, 'Frank Black', 'Current', 15000.00, 'AXIS');
+INSERT INTO account_details (account_number, account_holder_name, account_type, balance, bank_name) VALUES (8, 'Grace Green', 'Savings', 6000.00, 'AXIS');
+INSERT INTO account_details (account_number, account_holder_name, account_type, balance, bank_name) VALUES (9, 'Henry Blue', 'Current', 20000.00, 'AXIS');
+INSERT INTO account_details (account_number, account_holder_name, account_type, balance, bank_name) VALUES (10, 'Ivy Red', 'Savings', 4000.00, 'AXIS');

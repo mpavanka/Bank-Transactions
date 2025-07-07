@@ -1,0 +1,39 @@
+package java_Practice.spring_test_demo.practice;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+class CheckTest {
+
+    @Autowired
+    check check;
+
+    @Test
+    void testCheckPrimeWithPrimeNumber() {
+        ResponseEntity<String> response = check.checkPrime(7);
+        assertEquals("given number is prime for value: 7", response.getBody());
+    }
+
+    @Test
+    void testCheckPrimeWithNonPrimeNumber() {
+        ResponseEntity<String> response = check.checkPrime(4);
+        assertEquals("given number is not prime for value: 4", response.getBody());
+    }
+
+    @Test
+    void testCheckPrimeWithValueOne() {
+        ResponseEntity<String> response = check.checkPrime(1);
+        assertEquals("given number is not prime for value: 1", response.getBody());
+    }
+
+    @Test
+    void testCheckPrimeWithNegativeNumber() {
+        ResponseEntity<String> response = check.checkPrime(-5);
+        assertEquals("given number is not prime for value: -5", response.getBody());
+    }
+}
