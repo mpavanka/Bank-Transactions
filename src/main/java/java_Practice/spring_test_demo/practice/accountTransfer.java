@@ -7,11 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Component
 public class accountTransfer {
 
     @Autowired
     transferMoneyDTO transferRequest;
+
+    @Autowired
+    saveTransactionsDetails saveTransactionsDetails;
 
     @Autowired
     BankDetails bankDetails;
@@ -87,9 +92,11 @@ public class accountTransfer {
             senderAccount.setBalance(senderAccount.getBalance() - transferRequest.getAmountToTransfer());
             receiverAccount.setBalance(receiverAccount.getBalance() + transferRequest.getAmountToTransfer());
 
+            LocalDateTime transactionDate = LocalDateTime.now();
             // Update the database
             bankDetails.save(senderAccount);
             bankDetails.save(receiverAccount);
+            saveTransactionsDetails.saveTransactionDetailsInDb(id, transferRequest.getBankAccountNumber(), transferRequest.getAmountToTransfer(), transactionDate.toString());
         }
         catch (Exception e) {
             return "Transaction failed: " + e.getMessage();
