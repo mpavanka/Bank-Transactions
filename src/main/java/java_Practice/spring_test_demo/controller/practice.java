@@ -1,5 +1,6 @@
 package java_Practice.spring_test_demo.controller;
 
+import java_Practice.spring_test_demo.pojo.reverseStringValue;
 import java_Practice.spring_test_demo.pojo.transferMoneyDTO;
 import java_Practice.spring_test_demo.practice.accountTransfer;
 import java_Practice.spring_test_demo.practice.check;
@@ -33,6 +34,17 @@ public class practice {
             return validationMessage;
         }
         return accountTransferRequest.performTransfer(transferRequest, id);
+        // Here you would typically call a service to process the transfer
+    }
+
+
+    @PostMapping("/reversestring")
+    public String replaceString(@RequestBody reverseStringValue reverseStringValue) {
+
+        if ((reverseStringValue.getStringValue() ==null)) {
+            return "Please provide a valid string to reverse.";
+        }
+        return accountTransferRequest.replaceString(reverseStringValue);
         // Here you would typically call a service to process the transfer
     }
 }

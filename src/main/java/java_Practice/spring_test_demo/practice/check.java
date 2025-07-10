@@ -19,4 +19,13 @@ public class check {
         }
         return ResponseEntity.ok("given number is prime for value: " + value);
     }
+
+    public String palindrome(String value) {
+        String s = value.replaceAll("[^a-zA-Z ]", "");
+        StringBuilder newS = new StringBuilder();
+        for (int i = s.length() - 1; i >= 0; i--) {
+            newS.append(s.charAt(i));
+        }
+        return newS.toString();
+    }
 }

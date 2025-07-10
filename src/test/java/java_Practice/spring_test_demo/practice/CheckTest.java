@@ -36,4 +36,16 @@ class CheckTest {
         ResponseEntity<String> response = check.checkPrime(-5);
         assertEquals("given number is not prime for value: -5", response.getBody());
     }
+
+    @Test
+    void testPalindromeWithNormalString() {
+        String result = check.palindrome("hello");
+        assertEquals("olleh", result);
+    }
+
+    @Test
+    void testPalindromeWithPalindromeString() {
+        String result = check.palindrome("madam121211089000#$#");
+        assertEquals("madam", result);
+    }
 }
