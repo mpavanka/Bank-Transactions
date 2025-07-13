@@ -1,7 +1,10 @@
 package java_Practice.spring_test_demo.practice;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
@@ -10,8 +13,14 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class CheckTest {
 
-    @Autowired
+    @InjectMocks
     check check;
+
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     void testCheckPrimeWithPrimeNumber() {
@@ -48,4 +57,11 @@ class CheckTest {
         String result = check.palindrome("madam121211089000#$#");
         assertEquals("madam", result);
     }
+
+    @Test
+    void testPalindromeWithPalindromeStringNegative() {
+        String result = check.palindrome(null);
+        assertEquals("Please provide a valid string to reverse.", result);
+    }
+
 }

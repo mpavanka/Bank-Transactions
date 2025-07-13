@@ -7,22 +7,24 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java_Practice.spring_test_demo.practice.saveTransactionsDetails;
-import java_Practice.spring_test_demo.DAO.trasactionDetails;
+import java_Practice.spring_test_demo.DAO.TrasactionDetails;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
+@SpringBootTest
 public class saveTransactionsDetailsTest {
 
     @InjectMocks
     private saveTransactionsDetails saveTransactionsDetails;
 
     @Mock
-    private trasactionDetails trasactionDetails;
+    private TrasactionDetails trasactionDetails;
 
     @Test
-    public void testSaveTransactionDetailsInDb() {
+    void testSaveTransactionDetailsInDb() {
         // Arrange
         int accountFrom = 10;
         int accountTO = 1;

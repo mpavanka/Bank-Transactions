@@ -6,6 +6,7 @@ import java_Practice.spring_test_demo.practice.accountTransfer;
 import java_Practice.spring_test_demo.practice.check;
 import java_Practice.spring_test_demo.service.transferMoney;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
@@ -14,17 +15,15 @@ import java.util.Objects;
 @RequestMapping("/practice/API/v1/Problem")
 public class practice {
 
-    @Autowired
     check check;
-
-    @Autowired
     transferMoney accountTransferRequest;
+    accountTransfer accountTransfer;
 
     @Autowired
-    accountTransfer accountTransfer;
-    @GetMapping("/getCheckPrimeNumber/{id}")
-    public String hello(@PathVariable Integer id) {
-        return check.checkPrime(id).getBody();
+    public practice(transferMoney accountTransferRequest,accountTransfer accountTransfer, check check) {
+        this.accountTransferRequest = accountTransferRequest;
+        this.accountTransfer = accountTransfer;
+        this.check = check;
     }
 
     @PostMapping("/transferMoney/{id}")
@@ -46,5 +45,14 @@ public class practice {
         }
         return accountTransferRequest.replaceString(reverseStringValue);
         // Here you would typically call a service to process the transfer
+    }
+
+    @GetMapping("/accountNumber/{accountNumber}")
+    public ResponseEntity<?> accountById(@PathVariable Integer accountNumber) {
+
+        if ((accountNumber == null)) {
+            ResponseEntity.internalServerError().body("Please provide a valid account number.");
+        }
+        return accountTransferRequest.getAccountDetails(accountNumber);
     }
 }

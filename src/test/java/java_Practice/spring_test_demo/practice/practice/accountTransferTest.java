@@ -4,19 +4,22 @@ import java_Practice.spring_test_demo.DAO.BankDetails;
 import java_Practice.spring_test_demo.model.AccountDetailsEntity;
 import java_Practice.spring_test_demo.pojo.transferMoneyDTO;
 import java_Practice.spring_test_demo.practice.accountTransfer;
+import java_Practice.spring_test_demo.practice.saveTransactionsDetails;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class accountTransferTest {
 
     @InjectMocks
@@ -25,11 +28,14 @@ class accountTransferTest {
     @Mock
     private BankDetails bankDetails;
 
+    @Mock
+    private saveTransactionsDetails saveTransactionsDetails;
+
     private transferMoneyDTO transferRequest;
 
     @BeforeEach
     void setUp() {
-//        MockitoAnnotations.openMocks(this);
+
         transferRequest = new transferMoneyDTO();
         transferRequest.setBankAccountNumber(12345);
         transferRequest.setAmountToTransfer(500);
@@ -49,23 +55,38 @@ class accountTransferTest {
         String result = accountTransfer.validateDetails(transferRequest);
         assertEquals("Invalid bank account number.", result);
     }
-
     @Test
-    void testValidateAccountDetails_AccountNotFound() {
-        when(bankDetails.getAmount(12345)).thenReturn(null);
-
-        String result = accountTransfer.validateAccountDetails(transferRequest);
-        assertEquals("Account not found for account number: 12345", result);
+    void testValidateDetails_InvalidAmount() {
+        transferRequest.setAmountToTransfer(-1);
+        String result = accountTransfer.validateDetails(transferRequest);
+        assertEquals("Invalid amount to transfer.", result);
+    }
+    @Test
+    void testValidateDetailsNullAccountHolderName() {
+        transferRequest.setBankAccountHolderName(null);
+        String result = accountTransfer.validateDetails(transferRequest);
+        assertEquals("Invalid bank account holder name.", result);
     }
 
     @Test
-    void testValidateAccountDetails_InsufficientBalance() {
-        AccountDetailsEntity accountDetails = new AccountDetailsEntity();
-        accountDetails.setBalance(300);
-        when(bankDetails.getAmount(12345)).thenReturn(accountDetails);
+    void testValidateDetailsNullAccountEmpty() {
+        transferRequest.setBankAccountHolderName("");
+        String result = accountTransfer.validateDetails(transferRequest);
+        assertEquals("Invalid bank account holder name.", result);
+    }
 
-        String result = accountTransfer.validateAccountDetails(transferRequest);
-        assertEquals("Insufficient balance in the account.", result);
+    @Test
+    void testValidateDetailsEmptyAccountHolderName() {
+        transferRequest.setBankName("");
+        String result = accountTransfer.validateDetails(transferRequest);
+        assertEquals("Invalid bank name.", result);
+    }
+
+    @Test
+    void testValidateDetailsNullBankAccountName() {
+        transferRequest.setBankName(null);
+        String result = accountTransfer.validateDetails(transferRequest);
+        assertEquals("Invalid bank name.", result);
     }
 
     @Test
@@ -96,4 +117,55 @@ class accountTransferTest {
 
         assertEquals("Insufficient balance in the sender's account.", result);
     }
+
+    @Test
+    void testPerformTransaction_SenderAccountNotFound() {
+
+        String result = accountTransfer.performTransaction(transferRequest, 12345);
+
+        assertEquals("Sender account not found for account number: " + transferRequest.getBankAccountNumber(), result);
+    }
+
+    @Test
+    void testPerformTransaction_ReceiverAccountNotFound() {
+
+        AccountDetailsEntity senderAccount = new AccountDetailsEntity();
+        senderAccount.setBalance(1000);
+        when(bankDetails.getAmount(11)).thenReturn(senderAccount);
+
+
+        when(bankDetails.getAmount(transferRequest.getBankAccountNumber())).thenReturn(null);
+
+        String result = accountTransfer.performTransaction(transferRequest, 11);
+
+        assertEquals("Receiver account not found for account number: " + transferRequest.getBankAccountNumber(), result);
+    }
+
+    @Test
+    void testPerformTransactionFail() {
+        AccountDetailsEntity senderAccount = new AccountDetailsEntity();
+        senderAccount.setBalance(1000);
+        AccountDetailsEntity receiverAccount = new AccountDetailsEntity();
+        receiverAccount.setBalance(500);
+
+        when(bankDetails.getAmount(11)).thenReturn(senderAccount);
+        when(bankDetails.getAmount(transferRequest.getBankAccountNumber())).thenReturn(receiverAccount);
+        when(bankDetails.save(any(AccountDetailsEntity.class))).thenThrow(new RuntimeException("Database error"));
+        String result = accountTransfer.performTransaction(transferRequest, 11);
+
+        assertEquals("Transaction failed: Database error", result);
+    }
+
+    @Test
+    void testPerformTransactionNoResponse() {
+        AccountDetailsEntity receiverAccount = new AccountDetailsEntity();
+        receiverAccount.setAccountNumber(-500);
+
+        when(bankDetails.getAmount(11)).thenReturn(receiverAccount);
+
+        String result = accountTransfer.performTransaction(transferRequest, 11);
+
+        assertEquals("Insufficient balance in the sender's account.", result);
+    }
+
 }

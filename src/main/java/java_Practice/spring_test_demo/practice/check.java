@@ -4,7 +4,7 @@ package java_Practice.spring_test_demo.practice;// Online Java Compiler
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.Scanner;
+
 
 @Component
 public class check {
@@ -21,7 +21,10 @@ public class check {
     }
 
     public String palindrome(String value) {
-        String s = value.replaceAll("[^a-zA-Z ]", "");
+        if ((value  == null)) {
+            return "Please provide a valid string to reverse.";
+        }
+        String s = value.replaceAll("[^a-zA-Z]", "");
         StringBuilder newS = new StringBuilder();
         for (int i = s.length() - 1; i >= 0; i--) {
             newS.append(s.charAt(i));

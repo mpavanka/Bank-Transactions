@@ -25,16 +25,7 @@ public class transactionDetailsEntity {
     @Column(name = "transaction_date")
     private String transactionDate;
 
-    // Complete constructor
-    public transactionDetailsEntity(int transactionId, int fromAccountNumber, int toAccountNumber, double amountTransferred, String transactionDate) {
-        this.transactionId = transactionId;
-        this.fromAccountNumber = fromAccountNumber;
-        this.toAccountNumber = toAccountNumber;
-        this.amountTransferred = amountTransferred;
-        this.transactionDate = transactionDate;
-    }
-
-    // Default constructor
+       // Default constructor
     public transactionDetailsEntity() {
     }
 }

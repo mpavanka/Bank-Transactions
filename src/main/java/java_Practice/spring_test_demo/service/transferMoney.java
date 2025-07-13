@@ -11,11 +11,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class transferMoney {
 
-    @Autowired
+
     accountTransfer accountTransfer;
 
-    @Autowired
     check check;
+
+    public transferMoney(accountTransfer accountTransfer, check check) {
+        this.accountTransfer = accountTransfer;
+        this.check = check;
+    }
 
 
     public String performTransfer(transferMoneyDTO transferRequest, int id) {
@@ -24,6 +28,10 @@ public class transferMoney {
     }
 
     public String replaceString(reverseStringValue reverseStringValue) {
-        return check.palindrome(reverseStringValue.getStringValue()).toString();
+        return check.palindrome(reverseStringValue.getStringValue());
+    }
+
+    public ResponseEntity<?> getAccountDetails(Integer id) {
+        return accountTransfer.getAccountDetails(id);
     }
 }

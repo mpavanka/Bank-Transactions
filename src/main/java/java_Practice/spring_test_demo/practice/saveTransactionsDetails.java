@@ -1,6 +1,6 @@
 package java_Practice.spring_test_demo.practice;
 
-import java_Practice.spring_test_demo.DAO.trasactionDetails;
+import java_Practice.spring_test_demo.DAO.TrasactionDetails;
 import java_Practice.spring_test_demo.model.transactionDetailsEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,8 +8,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class saveTransactionsDetails {
 
+
+    TrasactionDetails tranDtl ;
+
     @Autowired
-    trasactionDetails tranDtl ;
+    public saveTransactionsDetails(TrasactionDetails tranDtl) {
+        this.tranDtl = tranDtl;
+    }
 
     public String saveTransactionDetailsInDb(int accountFrom, int  accountTO, double amountTransferred,String transactionDate) {
         transactionDetailsEntity transaction = new transactionDetailsEntity();
