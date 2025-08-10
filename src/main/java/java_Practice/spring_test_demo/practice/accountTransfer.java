@@ -52,6 +52,7 @@ public class accountTransfer {
 
         // Validate account details
         AccountDetailsEntity senderAccount = bankDetails.getAmount(id);
+        System.out.println("Sender Account: " + senderAccount);
         if (senderAccount == null) {
             return "Sender account not found for account number: " + transferRequest.getBankAccountNumber();
         }

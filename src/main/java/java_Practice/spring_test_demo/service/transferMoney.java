@@ -15,7 +15,7 @@ public class transferMoney {
     accountTransfer accountTransfer;
 
     check check;
-
+    @Autowired
     public transferMoney(accountTransfer accountTransfer, check check) {
         this.accountTransfer = accountTransfer;
         this.check = check;
