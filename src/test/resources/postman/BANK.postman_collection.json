@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "545c275e-0eea-46de-8c22-28da1d4ac5aa",
+		"name": "BANK",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET-Details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/practice/API/v1/Problem/accountNumber/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"practice",
+						"API",
+						"v1",
+						"Problem",
+						"accountNumber",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET-Details Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bnak-transactions.onrender.com/practice/API/v1/Problem/accountNumber/1",
+					"protocol": "https",
+					"host": [
+						"bnak-transactions",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"practice",
+						"API",
+						"v1",
+						"Problem",
+						"accountNumber",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transferMoney",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"bankAccountNumber\": 10,\r\n  \"bankAccountHolderName\": \"Ivy Red\",\r\n  \"amountToTransfer\":2000.00, \r\n  \"bankName\": \"AXIS\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/practice/API/v1/Problem/transferMoney/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"practice",
+						"API",
+						"v1",
+						"Problem",
+						"transferMoney",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reverseString",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"stringValue\":\"Hello          World 12345678uytrewq!!!!!!!!!!!@#$%^<M:\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/practice/API/v1/Problem/reversestring",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"practice",
+						"API",
+						"v1",
+						"Problem",
+						"reversestring"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
