@@ -1,0 +1,68 @@
+{
+  "info": {
+    "_postman_id": "b1e7c5e0-2025-10-05-0001",
+    "name": "Bank Transactions API",
+    "description": "Postman collection for Bank Transactions Spring Boot Project (created October 5, 2025)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Transfer Money",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fromAccount\": 123,\n  \"toAccount\": 456,\n  \"amount\": 1000.0\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/practice/API/v1/Problem/transferMoney/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["practice", "API", "v1", "Problem", "transferMoney", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Reverse String",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"stringValue\": \"Hello World\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/practice/API/v1/Problem/reversestring",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["practice", "API", "v1", "Problem", "reversestring"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Account By Number",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/practice/API/v1/Problem/accountNumber/123",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["practice", "API", "v1", "Problem", "accountNumber", "123"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
+
