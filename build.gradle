@@ -38,7 +38,3 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-logging'
 }
-
-tasks.named('test') {
-	useJUnitPlatform()
-}
